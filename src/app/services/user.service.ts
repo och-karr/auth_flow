@@ -15,4 +15,8 @@ export class UserService {
       })
     );
   }
+
+  completeProfile(data: any): Observable<any> {
+    return this._httpClient.post<any>('https://us-central1-courses-auth.cloudfunctions.net/auth/complete-profile', data);
+  }
 }
