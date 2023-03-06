@@ -9,13 +9,28 @@ import { LoginComponentModule } from './components/login/login.component-module'
 import { LoggedInComponentModule } from './components/logged-in/logged-in.component-module';
 import { CompleteProfileComponentModule } from './components/complete-profile/complete-profile.component-module';
 import { HomeComponentModule } from './components/home/home.component-module';
+import {LoginGuard} from "./guards/login/login.guard";
 
 @NgModule({
   imports: [RouterModule.forRoot([
-    { path: 'login', component: LoginComponent },
-    { path: 'logged-in', component: LoggedInComponent },
-    { path: 'complete-profile', component: CompleteProfileComponent },
-    { path: '', component: HomeComponent }
+    {
+      path: 'login',
+      component: LoginComponent
+    },
+    {
+      path: 'logged-in',
+      component: LoggedInComponent,
+      canActivate: [LoginGuard],
+      data: { redirectUrl: '/login' }
+    },
+    {
+      path: 'complete-profile',
+      component: CompleteProfileComponent
+    },
+    {
+      path: '',
+      component: HomeComponent
+    }
   ]), UserServiceModule, LoginComponentModule, LoggedInComponentModule, CompleteProfileComponentModule, HomeComponentModule],
   exports: [RouterModule]
 })
