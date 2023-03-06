@@ -8,19 +8,32 @@ export class UserService {
   private _userAccessTokenSubject: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(localStorage.getItem('accessToken'));
   public userAccessToken$: Observable<string | null> = this._userAccessTokenSubject.asObservable();
 
+  private _firstNameSubject: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(localStorage.getItem('firstName'));
+  public firstName$: Observable<string | null> = this._firstNameSubject.asObservable();
+
+  private _lastNameSubject: BehaviorSubject<string | null> = new BehaviorSubject<string | null>(localStorage.getItem('lastName'));
+  public lastName$: Observable<string | null> = this._lastNameSubject.asObservable();
+
   constructor(private _httpClient: HttpClient) {
   }
 
   login(data: any): Observable<any> {
     return this._httpClient.post<any>('https://us-central1-courses-auth.cloudfunctions.net/auth/login', data).pipe(
       tap(val => {
-        this._userAccessTokenSubject.next(data.data.accessToken);
+        this._userAccessTokenSubject.next(val.data.accessToken);
         localStorage.setItem('accessToken', val.data.accessToken);
       })
     );
   }
 
   completeProfile(data: any): Observable<any> {
-    return this._httpClient.post<any>('https://us-central1-courses-auth.cloudfunctions.net/auth/complete-profile', data);
+    return this._httpClient.post<any>('https://us-central1-courses-auth.cloudfunctions.net/auth/complete-profile', data).pipe(
+      tap(() => {
+        this._firstNameSubject.next(data.data.firstName);
+        localStorage.setItem('firstName', data.data.firstName);
+        this._lastNameSubject.next(data.data.lastName);
+        localStorage.setItem('lastName', data.data.lastName);
+      })
+    );
   }
 }

@@ -10,6 +10,7 @@ import { LoggedInComponentModule } from './components/logged-in/logged-in.compon
 import { CompleteProfileComponentModule } from './components/complete-profile/complete-profile.component-module';
 import { HomeComponentModule } from './components/home/home.component-module';
 import {LoginGuard} from "./guards/login/login.guard";
+import {CompletedProfileGuard} from "./guards/completed-profile/completed-profile.guard";
 
 @NgModule({
   imports: [RouterModule.forRoot([
@@ -20,8 +21,8 @@ import {LoginGuard} from "./guards/login/login.guard";
     {
       path: 'logged-in',
       component: LoggedInComponent,
-      canActivate: [LoginGuard],
-      data: { redirectUrl: '/login' }
+      canActivate: [LoginGuard, CompletedProfileGuard],
+      data: { redirectUrlLogin: '/login', redirectUrlCompleteProfile: '/complete-profile' }
     },
     {
       path: 'complete-profile',
