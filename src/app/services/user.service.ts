@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject, Observable, tap} from "rxjs";
 import { HttpClient } from '@angular/common/http';
+import {AuthDataModel} from "../models/auth-data.model";
+import {AuthModel} from "../models/auth.model";
+import {LoginModel} from "../models/login.model";
+import {ProfileModel} from "../models/profile.model";
 
 @Injectable()
 export class UserService {
@@ -17,8 +21,8 @@ export class UserService {
   constructor(private _httpClient: HttpClient) {
   }
 
-  login(data: any): Observable<any> {
-    return this._httpClient.post<any>('https://us-central1-courses-auth.cloudfunctions.net/auth/login', data).pipe(
+  login(data: AuthModel<AuthDataModel>): Observable<AuthModel<LoginModel>> {
+    return this._httpClient.post<AuthModel<LoginModel>>('https://us-central1-courses-auth.cloudfunctions.net/auth/login', data).pipe(
       tap(val => {
         this._userAccessTokenSubject.next(val.data.accessToken);
         localStorage.setItem('accessToken', val.data.accessToken);
@@ -26,8 +30,8 @@ export class UserService {
     );
   }
 
-  completeProfile(data: any): Observable<any> {
-    return this._httpClient.post<any>('https://us-central1-courses-auth.cloudfunctions.net/auth/complete-profile', data).pipe(
+  completeProfile(data: AuthModel<ProfileModel>): Observable<void> {
+    return this._httpClient.post<void>('https://us-central1-courses-auth.cloudfunctions.net/auth/complete-profile', data).pipe(
       tap(() => {
         this._firstNameSubject.next(data.data.firstName);
         localStorage.setItem('firstName', data.data.firstName);
