@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
-import {Observable, tap} from "rxjs";
 import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Injectable()
 export class UserService {
+  private _emailVerifiedSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(localStorage.getItem('emailVerified') === 'true');
+  public emailVerified$: Observable<boolean> = this._emailVerifiedSubject.asObservable();
 
   constructor(private _httpClient: HttpClient) {
   }
