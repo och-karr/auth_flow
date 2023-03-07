@@ -23,12 +23,12 @@ export class HasRoleDirective implements OnInit, OnDestroy {
 
   ngOnInit() {
     this._testService
-      .hasRole(this.hasRole as string)
+      .get()
       .pipe(takeUntil(this._onDestroy$))
-      .subscribe((hasRole: boolean) => {
+      .subscribe((role: string | null) => {
         this.viewContainer.clear();
 
-        if (hasRole) {
+        if (role === 'admin') {
           this.viewContainer.createEmbeddedView(this.templateRef);
         } else {
           if (this.elseTpl) {
