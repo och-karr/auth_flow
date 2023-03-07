@@ -7,6 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from "@angular/common/http";
 import {ContextRoleService} from "./services/context-role.service";
 import {ContextEmailService} from "./services/context-email.service";
+import {CheckRoleGuard} from "./guards/check-role/check-role.guard";
+import {CheckLoginGuard} from "./guards/check-login/check-login.guard";
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import {ContextEmailService} from "./services/context-email.service";
   ],
   providers: [
     ContextRoleService,
-    ContextEmailService
+    ContextEmailService,
+    CheckRoleGuard,
+    CheckLoginGuard
   ],
   bootstrap: [AppComponent]
 })

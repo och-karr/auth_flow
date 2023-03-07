@@ -10,7 +10,8 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 export class HomeComponent {
 
   logoutUser() {
-    localStorage.removeItem('accessToken');
+    localStorage.removeItem('role');
+    localStorage.removeItem('email');
     window.location.reload();
   }
 }
