@@ -1,0 +1,7 @@
+<mat-card>
+  <mat-card-title>Welcome</mat-card-title>
+  <ng-container *hasRole="'admin'">
+    <mat-card-content>This is visible for admin</mat-card-content>
+  </ng-container>
+  <mat-card-content>This is visible for everyone</mat-card-content>
+</mat-card>
