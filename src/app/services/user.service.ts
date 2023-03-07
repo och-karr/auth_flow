@@ -10,4 +10,8 @@ export class UserService {
   loginUser(data: any): Observable<any> {
     return this._httpClient.post<any>('https://us-central1-courses-auth.cloudfunctions.net/auth/login', data);
   }
+
+  loginAdmin(data: any): Observable<any> {
+    return this._httpClient.post<any>('https://us-central1-courses-auth.cloudfunctions.net/auth/login-admin', data);
+  }
 }
