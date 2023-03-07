@@ -1,4 +1,6 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { Observable } from 'rxjs';
+import { ContextEmailService } from '../../services/context-email.service';
 
 @Component({
   selector: 'app-logged-in',
@@ -7,7 +9,8 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoggedInComponent {
+  readonly email$: Observable<string | null> = this._contextEmailService.get();
 
-  constructor() {
+  constructor(private _contextEmailService: ContextEmailService) {
   }
 }

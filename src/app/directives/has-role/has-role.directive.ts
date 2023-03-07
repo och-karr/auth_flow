@@ -1,6 +1,6 @@
 import {ChangeDetectorRef, Directive, Input, OnDestroy, OnInit, TemplateRef, ViewContainerRef} from '@angular/core';
 import {Subject, takeUntil} from "rxjs";
-import {ContextService} from "../../services/context.service";
+import {ContextRoleService} from "../../services/context-role.service";
 
 @Directive({ selector: '[hasRole]' })
 export class HasRoleDirective implements OnInit, OnDestroy {
@@ -18,7 +18,7 @@ export class HasRoleDirective implements OnInit, OnDestroy {
     private templateRef: TemplateRef<any>,
     private viewContainer: ViewContainerRef,
     private cdr: ChangeDetectorRef,
-    private _testService: ContextService
+    private _testService: ContextRoleService
   ) {}
 
   ngOnInit() {

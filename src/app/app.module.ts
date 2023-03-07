@@ -5,7 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from "@angular/common/http";
-import {ContextService} from "./services/context.service";
+import {ContextRoleService} from "./services/context-role.service";
+import {ContextEmailService} from "./services/context-email.service";
 
 @NgModule({
   declarations: [
@@ -17,7 +18,10 @@ import {ContextService} from "./services/context.service";
     BrowserAnimationsModule,
     HttpClientModule
   ],
-  providers: [ContextService],
+  providers: [
+    ContextRoleService,
+    ContextEmailService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
