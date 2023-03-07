@@ -17,6 +17,9 @@
         </mat-form-field>
       </div>
       <div>
+        <mat-error *ngIf="form.hasError('beValidation')">{{ form.getError('beValidation') }}</mat-error>
+      </div>
+      <div>
         <button [disabled]="!form.valid" type="submit" mat-raised-button color="primary">Submit</button>
       </div>
     </form>

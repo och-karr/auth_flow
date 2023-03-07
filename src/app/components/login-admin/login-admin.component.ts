@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, ViewEncapsulation} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserService} from "../../services/user.service";
 import {Router} from "@angular/router";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-login-admin',
@@ -16,7 +17,7 @@ export class LoginAdminComponent {
     password: new FormControl('', [Validators.required]),
   });
 
-  constructor(private _userService: UserService, private _router: Router) {}
+  constructor(private _userService: UserService, private _router: Router, private cd: ChangeDetectorRef) {}
 
   onFormSubmitted(form: FormGroup): void {
     this._userService.loginAdmin({
@@ -29,7 +30,11 @@ export class LoginAdminComponent {
         next: () => {
           this._router.navigate(['/logged-in'])
         },
-        error: () => {
+        error: (err: HttpErrorResponse) => {
+          this.form.setErrors({
+            beValidation: err.error.message || 'Non existing admin'
+          })
+          this.cd.markForCheck()
         }
       })
   }
