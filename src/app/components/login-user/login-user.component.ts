@@ -27,7 +27,7 @@ export class LoginUserComponent {
     })
       .subscribe({
         next: () => {
-          // this._router.navigate(['/logged-in'])
+          this._router.navigate(['/logged-in'])
         },
         error: () => {
         }
