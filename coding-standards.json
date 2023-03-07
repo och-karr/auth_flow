@@ -55,6 +55,12 @@
       "type": "ANGULAR_GUARD",
       "suffix": "Guard",
       "folder": "guards/$name$"
+    },
+    "directive": {
+      "id": "directive",
+      "type": "ANGULAR_DIRECTIVE",
+      "suffix": "Directive",
+      "folder": "directives/$name$"
     }
   }
 }
