@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -8,10 +9,11 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeComponent {
+  constructor(private _userService: UserService) {
+  }
 
   logoutUser() {
-    localStorage.removeItem('role');
-    localStorage.removeItem('email');
+    this._userService.logout();
     window.location.reload();
   }
 }

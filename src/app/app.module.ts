@@ -9,6 +9,7 @@ import {ContextRoleService} from "./services/context-role.service";
 import {ContextEmailService} from "./services/context-email.service";
 import {CheckRoleGuard} from "./guards/check-role/check-role.guard";
 import {CheckLoginGuard} from "./guards/check-login/check-login.guard";
+import {STORAGE} from "./services/storage";
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import {CheckLoginGuard} from "./guards/check-login/check-login.guard";
     HttpClientModule
   ],
   providers: [
+    { provide: STORAGE, useValue: localStorage },
     ContextRoleService,
     ContextEmailService,
     CheckRoleGuard,

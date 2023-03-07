@@ -26,4 +26,9 @@ export class UserService {
       })
     );
   }
+
+  logout(): void {
+    this._contextRoleService.remove();
+    this._contextEmailService.remove();
+  }
 }
